@@ -1,0 +1,55 @@
+{
+  "name": "merry-township-jwt-service",
+  "version": "0.0.0",
+  "description": "scope based jwt auth service using township",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon --exec 'npm run test:tape'",
+    "start": "NODE_ENV=production node index.js",
+    "test": "npm run test:lint && npm run test:tape",
+    "test:tape": "tape *.test.js | tap-spec",
+    "test:lint": "eslint *.js lib/*.js",
+    "deploy": "now --alias",
+    "deploy:ci": "now --alias --token $NOW_TOKEN"
+  },
+  "author": "Andrew Davis <diffalot@diff.mx>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "levelup": "^1.3.3",
+    "merry": "^4.7.2",
+    "mongodown": "^1.1.0",
+    "nodemon": "^1.11.0",
+    "township-accounts": "^4.0.3",
+    "township-email": "^1.0.0",
+    "township-reset-password-token": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1",
+    "memdb": "^1.3.1",
+    "nodemailer-stub-transport": "^1.1.0",
+    "now": "^4.6.0",
+    "pre-commit": "^1.2.2",
+    "request": "^2.79.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  },
+  "now": {
+    "name": "merry-township-jwt-service",
+    "alias": "merry-township-jwt-service.now.sh",
+    "type": "npm",
+    "env": {
+      "AUTH_SECRET": "@merry-jwt-auth-secret",
+      "ALLOWED_SCOPES": "buyer,seller",
+      "DEFAULT_SCOPES": "default",
+      "EMAIL_FROM": "auth@gigantic.computer",
+      "MONGO_URI": "@merry-jwt-mongo-uri"
+    }
+  }
+}

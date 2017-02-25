@@ -1,0 +1,19 @@
+machine:
+  timezone: America/New_York
+  node:
+    version: 7
+
+dependencies:
+  override:
+    - npm install
+
+test:
+  override:
+    - cp .env.example .env
+    - npm test
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run deploy:ci
